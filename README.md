@@ -6,7 +6,7 @@ Catmandu::I18N - tools for text localisation
 
 [![Build Status](https://travis-ci.org/LibreCat/Catmandu-I18N.svg?branch=master)](https://travis-ci.org/LibreCat/Catmandu-I18N)
 [![Coverage](https://coveralls.io/repos/LibreCat/Catmandu-I18N/badge.png?branch=master)](https://coveralls.io/r/LibreCat/Catmandu-I18N)
-[![CPANTS kwalitee](http://cpants.cpanauthors.org/dist/Catmandu-I18N.png)](http://cpants.cpanauthors.org/dist/Catmandu-I18N)
+[![CPANTS kwalitee](https://cpants.cpanauthors.org/dist/Catmandu-I18N.png)](https://cpants.cpanauthors.org/dist/Catmandu-I18N)
 
 # SYNOPSIS
 
