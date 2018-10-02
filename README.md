@@ -36,7 +36,13 @@ Catmandu::I18N - tools for text localisation
 
     Configuration for Locale::Maketext.
 
-    Must be hash reference.
+    Must be either:
+
+    \* hash reference
+
+    \* string (e.g. "i18n")
+
+    When the config is a string, it is interpreted as the path to the I18N configuration in Catmandu config.
 
     Required
 
@@ -62,7 +68,7 @@ Nicolas Franck `<nicolas.franck at ugent.be>`
 
 # SEE ALSO
 
-[Catmandu](https://metacpan.org/pod/Catmandu), [Locale::Maketext](https://metacpan.org/pod/Locale::Maketext)
+[Catmandu::Fix::i18n](https://metacpan.org/pod/Catmandu::Fix::i18n), [Catmandu](https://metacpan.org/pod/Catmandu), [Locale::Maketext](https://metacpan.org/pod/Locale::Maketext)
 
 # LICENSE AND COPYRIGHT
 
