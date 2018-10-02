@@ -1,6 +1,7 @@
 package Catmandu::I18N;
 use Catmandu::Sane;
 use Catmandu::Util qw(:check :is :array);
+use Catmandu;
 use Data::Dumper;
 use Catmandu::Error;
 use Moo;
@@ -8,6 +9,17 @@ use Moo;
 has config => (
     is => "ro",
     isa => sub { check_hash_ref( $_[0] ); },
+    lazy => 1,
+    coerce => sub {
+        my $c = $_[0];
+        return $c if is_hash_ref($c);
+        if( is_string($c) ){
+
+            $c = Catmandu::Util::data_at( $c, Catmandu->config() );
+
+        }
+        $c;
+    },
     required => 1
 );
 
@@ -115,7 +127,13 @@ Catmandu::I18N - tools for text localisation
 
 Configuration for Locale::Maketext.
 
-Must be hash reference.
+Must be either:
+
+* hash reference
+
+* string (e.g. "i18n")
+
+When the config is a string, it is interpreted as the path to the I18N configuration in Catmandu config.
 
 Required
 

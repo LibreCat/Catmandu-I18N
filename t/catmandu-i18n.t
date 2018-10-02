@@ -4,6 +4,7 @@ use utf8;
 use Test::More;
 use Test::Exception;
 use File::Spec;
+use Catmandu;
 
 my $pkg;
 BEGIN {
@@ -23,10 +24,22 @@ require_ok $pkg;
 
         $i = $pkg->new( config => $config );
 
-    },"i18n created");
+    },"i18n created from config hash reference");
+
+    my $i2;
+    Catmandu->config({ i18n => $config });
+
+    lives_ok(sub {
+
+        $i2 = $pkg->new( config => "i18n" );
+
+    },"i18n created from catmandu config");
 
     is( $i->t( "nl", "mail_subject" ), "Overzicht van uw huidige ontleningen" );
     is( $i->t( "en", "mail_subject" ), "Summary of your current loans at the library" );
+
+    is( $i->t( "nl", "mail_subject" ), $i2->t( "nl", "mail_subject" ) );
+    is( $i->t( "en", "mail_subject" ), $i2->t( "en", "mail_subject" ) );
 
     is( $i->t( "nl", "mail_greeting", "Nicolas" ), "Geachte Nicolas" );
     is( $i->t( "en", "mail_greeting", "Nicolas" ), "Dear Nicolas" );
