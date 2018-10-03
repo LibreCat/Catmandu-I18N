@@ -46,6 +46,7 @@ sub _build_handle {
 
     my $c = Data::Dumper->new( [$self->config()] )->Deepcopy(1)->Indent(0)->Dump();
     $c = substr( $c, index($c, "{" ) );
+    $c =~ s/;$//o;
     my $package_name = "Catmandu::I18N::_Handle::$IDX";
     my $perl = <<EOF;
 package $package_name;
