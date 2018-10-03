@@ -74,7 +74,9 @@ EOF
 
 sub t {
     my( $self, $lang, @args ) = @_;
+    Catmandu::Error->throw( "no lang provided" ) unless is_string( $lang );
     my $lh = $self->handle()->get_handle( $lang );
+    Catmandu::Error->throw( "unable to find handle for language $lang" ) unless defined( $lh );
     $lh->fail_with(sub {}) if $self->on_failure() eq "undef";
     $lh->maketext( @args );
 }
