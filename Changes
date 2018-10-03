@@ -1,4 +1,5 @@
 {{$NEXT}}
   - created Catmandu::I18N
   - created Catmandu::Fix::i18n
+  - created Locale::Maketext::Lexicon::CatmanduConfig
   - added tests
