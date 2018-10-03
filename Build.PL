@@ -26,6 +26,7 @@ my %module_build_args = (
     "Catmandu" => "1.0",
     "Data::Dumper" => 0,
     "Locale::Maketext" => 0,
+    "Locale::Maketext::Lexicon" => 0,
     "Moo" => 0,
     "perl" => "v5.10.1"
   }
