@@ -158,13 +158,20 @@ Note: "undef" should be a string, as opposed to undef.
 
 =back
 
+=head1 NOTES
+
+* the lexicon implementation determines the format of the message.
+
+    e.g. only L<Locale::Maketext::Lexicon::Gettext> supports placeholders like %1.
+         for other implementations you need to use placeholders like [_1]
+
 =head1 AUTHORS
 
 Nicolas Franck C<< <nicolas.franck at ugent.be> >>
 
 =head1 SEE ALSO
 
-L<Catmandu::Fix::i18n>, L<Catmandu>, L<Locale::Maketext>
+L<Catmandu::Fix::i18n>, L<Locale::Maketext::Lexicon::CatmanduConfig>, L<Catmandu>, L<Locale::Maketext>
 
 =head1 LICENSE AND COPYRIGHT
 

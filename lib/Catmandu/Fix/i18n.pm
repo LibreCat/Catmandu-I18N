@@ -136,7 +136,7 @@ Nicolas Franck C<< <nicolas.franck at ugent.be> >>
 
 =head1 SEE ALSO
 
-L<Catmandu>, L<Locale::Maketext>
+L<Catmandu::I18N>, L<Catmandu>, L<Locale::Maketext>
 
 =head1 LICENSE AND COPYRIGHT
 
