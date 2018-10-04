@@ -62,13 +62,21 @@ Catmandu::I18N - tools for text localisation
 
     Note: "undef" should be a string, as opposed to undef.
 
+# NOTES
+
+\* the lexicon implementation determines the format of the message.
+
+e.g. only [Locale::Maketext::Lexicon::Gettext](https://metacpan.org/pod/Locale::Maketext::Lexicon::Gettext) supports placeholders like %1.
+
+For other implementations you need to use placeholders like \[\_1\]
+
 # AUTHORS
 
 Nicolas Franck `<nicolas.franck at ugent.be>`
 
 # SEE ALSO
 
-[Catmandu::Fix::i18n](https://metacpan.org/pod/Catmandu::Fix::i18n), [Catmandu](https://metacpan.org/pod/Catmandu), [Locale::Maketext](https://metacpan.org/pod/Locale::Maketext)
+[Catmandu::Fix::i18n](https://metacpan.org/pod/Catmandu::Fix::i18n), [Locale::Maketext::Lexicon::CatmanduConfig](https://metacpan.org/pod/Locale::Maketext::Lexicon::CatmanduConfig), [Catmandu](https://metacpan.org/pod/Catmandu), [Locale::Maketext](https://metacpan.org/pod/Locale::Maketext)
 
 # LICENSE AND COPYRIGHT
 

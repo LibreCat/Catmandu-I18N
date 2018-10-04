@@ -162,8 +162,9 @@ Note: "undef" should be a string, as opposed to undef.
 
 * the lexicon implementation determines the format of the message.
 
-    e.g. only L<Locale::Maketext::Lexicon::Gettext> supports placeholders like %1.
-         for other implementations you need to use placeholders like [_1]
+e.g. only L<Locale::Maketext::Lexicon::Gettext> supports placeholders like %1.
+
+For other implementations you need to use placeholders like [_1]
 
 =head1 AUTHORS
 
