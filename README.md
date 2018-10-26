@@ -62,6 +62,35 @@ Catmandu::I18N - tools for text localisation
 
     Note: "undef" should be a string, as opposed to undef.
 
+- fallback\_languages
+
+    array of fallback language codes
+
+    \* must be array reference
+
+    \* default is \[ "i-default","en","en-US" \] as determined by [Locale::Maketext](https://metacpan.org/pod/Locale::Maketext)
+
+    When [Locale::Maketext](https://metacpan.org/pod/Locale::Maketext) does not find the specified language in your config, it
+    will fallback to one of these, and then load the handle for that.
+
+    Only if that fallback language does not exist in the config, will it fail.
+
+    Example 1:
+
+    fallback\_languages is \[ "en" \]
+
+    you have only language "en" in your config, but you request language "nl",
+    then you'll get the message in English.
+
+    Example 2:
+
+    fallback\_languages is \[ "en" \]
+
+    you have only language "nl" in your config, but you request language "fr",
+    then the creation of the message will fail
+
+    You can set this to an empty array for consistent behaviour.
+
 # NOTES
 
 \* the lexicon implementation determines the format of the message.
