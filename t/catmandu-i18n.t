@@ -66,6 +66,17 @@ require_ok $pkg;
 
     });
 
+    #fallback_languages is [ "i-default","en","en-US" ]
+    is( $i->t( "language_x", "mail_subject" ), "Summary of your current loans at the library" );
+
+    $i = $pkg->new( config => $config, fallback_languages => [] );
+
+    dies_ok(sub{
+
+        $i->t( "language_x", "mail_subject" );
+
+    }, "request non existant language with empty fallback_languages" );
+
 }
 
-done_testing 19;
+done_testing;

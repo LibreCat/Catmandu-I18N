@@ -6,6 +6,13 @@ use Data::Dumper;
 use Catmandu::Error;
 use Moo;
 
+has fallback_languages => (
+    is => "ro",
+    isa => sub { check_array_ref( $_[0] ); },
+    lazy => 1,
+    default => sub { [ "i-default", "en", "en-US" ]; }
+);
+
 has config => (
     is => "ro",
     isa => sub { check_hash_ref( $_[0] ); },
@@ -44,6 +51,8 @@ sub _build_handle {
 
     my $self = $_[0];
 
+    my $fallback_languages = "(".join( ",", map { "\"$_\"" } @{ $self->fallback_languages() } ).")";
+
     my $c = Data::Dumper->new( [$self->config()] )->Deepcopy(1)->Indent(0)->Dump();
     $c = substr( $c, index($c, "{" ) );
     $c =~ s/;$//o;
@@ -53,6 +62,12 @@ package $package_name;
 use Catmandu::Sane;
 use parent "Locale::Maketext";
 use Locale::Maketext::Lexicon $c;
+
+sub fallback_languages {
+    my \@langs = $fallback_languages;
+    \@langs;
+}
+sub fallback_language_classes {}
 EOF
     if($self->on_failure() eq "auto"){
 
@@ -75,10 +90,20 @@ EOF
 
 sub t {
     my( $self, $lang, @args ) = @_;
+
     Catmandu::Error->throw( "no lang provided" ) unless is_string( $lang );
+
+    if( scalar(@{ $self->fallback_languages() }) == 0 && !exists( $self->config()->{$lang} ) ){
+
+        Catmandu::Error->throw( "language $lang not found in config, and array of fallback_languages is empty" );
+
+    }
+
     my $lh = $self->handle()->get_handle( $lang );
     Catmandu::Error->throw( "unable to find handle for language $lang" ) unless defined( $lh );
+
     $lh->fail_with(sub {}) if $self->on_failure() eq "undef";
+
     $lh->maketext( @args );
 }
 
@@ -155,6 +180,35 @@ Possible values:
 Default: "undef"
 
 Note: "undef" should be a string, as opposed to undef.
+
+=item fallback_languages
+
+array of fallback language codes
+
+* must be array reference
+
+* default is [ "i-default","en","en-US" ] as determined by L<Locale::Maketext>
+
+When L<Locale::Maketext> does not find the specified language in your config, it
+will fallback to one of these, and then load the handle for that.
+
+Only if that fallback language does not exist in the config, will it fail.
+
+Example 1:
+
+fallback_languages is [ "en" ]
+
+you have only language "en" in your config, but you request language "nl",
+then you'll get the message in English.
+
+Example 2:
+
+fallback_languages is [ "en" ]
+
+you have only language "nl" in your config, but you request language "fr",
+then the creation of the message will fail
+
+You can set this to an empty array for consistent behaviour.
 
 =back
 

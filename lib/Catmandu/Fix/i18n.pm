@@ -22,7 +22,8 @@ sub _build_i18n {
 
     Catmandu::I18N->new(
         config => $self->config(),
-        on_failure => "undef"
+        on_failure => "undef",
+        fallback_languages => []
     );
 }
 
